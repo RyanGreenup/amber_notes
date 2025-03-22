@@ -3,6 +3,7 @@
   import IconHamburger from "../components/icons/IconHamburger.svelte";
   import IconSidewaysHamburger from "../components/icons/IconSidewaysHamburger.svelte";
   import SidebarList from "../components/sidebar/SidebarList.svelte";
+  import { Folder } from "@lucide/svelte";
 
   let name = $state("");
   let greetMsg = $state("");
@@ -17,7 +18,7 @@
 <div class="navbar bg-base-100 shadow-sm fixed top-0 z-10 w-full">
   <div class="flex-none">
     <label for="my-drawer-2" class="btn btn-square btn-ghost drawer-button">
-      <IconHamburger/>
+      <IconHamburger />
     </label>
   </div>
   <div class="flex-1">
@@ -25,7 +26,7 @@
   </div>
   <div class="flex-none">
     <button class="btn btn-square btn-ghost">
-      <IconSidewaysHamburger/>
+      <IconSidewaysHamburger />
     </button>
   </div>
 </div>
@@ -34,18 +35,11 @@
   <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col items-center justify-center">
     <!-- Page content here -->
-    <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
-      Open drawer
-    </label>
   </div>
   <div class="drawer-side">
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"
     ></label>
-    <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-      <!-- Sidebar content here -->
-      <li><a>Sidebar Item 1</a></li>
-      <li><a>Sidebar Item 2</a></li>
-    </ul>
+    <SidebarList />
   </div>
 </div>
 
