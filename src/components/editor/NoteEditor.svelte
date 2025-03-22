@@ -11,13 +11,10 @@
   }
 </script>
 
-<div class="p-6 overflow-auto">
-
-<div class="card bg-base-100 w-96 shadow-sm ">
-  <div class="card-body ">
-  <h1>Some Dummy Content</h1>
+<div class="p-6 overflow-auto h-full w-full">
+  <div class="card bg-base-100 shadow-sm h-full w-full">
+    <div class="card-body">
+      <h1>Some Dummy Content</h1>
+    </div>
   </div>
-</div>
-
-
 </div>
