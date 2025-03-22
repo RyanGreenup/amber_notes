@@ -12,11 +12,18 @@
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
     greetMsg = await invoke("greet", { name });
   }
+  
+  function toggleDrawer() {
+    const drawer = document.getElementById("my-drawer-2") as HTMLInputElement;
+    if (drawer) {
+      drawer.checked = !drawer.checked;
+    }
+  }
 </script>
 
-<div class="navbar bg-base-100 shadow-sm">
+<div class="navbar bg-base-100 shadow-sm z-10">
   <div class="flex-none">
-    <button class="my-hamburger-spacing">
+    <button class="btn btn-ghost drawer-button lg:hidden" on:click={toggleDrawer}>
       <IconHamburger />
     </button>
   </div>
@@ -32,12 +39,8 @@
 
 <div class="drawer lg:drawer-open">
   <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex flex-col items-center justify-center">
+  <div class="drawer-content flex flex-col">
     <!-- Page content here -->
-    <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
-      Open drawer
-    </label>
-  </div>
   <div class="drawer-side">
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"
     ></label>
