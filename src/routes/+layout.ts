@@ -3,3 +3,9 @@
 // See: https://v2.tauri.app/start/frontend/sveltekit/ for more info
 export const prerender = true;
 export const ssr = false;
+
+// <script>
+//   let { children } = $props();
+//   import "../app.css";
+// </script>
+// {@render children()}
