@@ -2,6 +2,7 @@
   import { invoke } from "@tauri-apps/api/core";
     import IconHamburger from "../components/icons/IconHamburger.svelte";
     import IconSidewaysHamburger from "../components/icons/IconSidewaysHamburger.svelte";
+    import SidebarList from "../components/sidebar/SidebarList.svelte";
 
   let name = $state("");
   let greetMsg = $state("");
@@ -42,6 +43,8 @@
   </div>
   <div class="drawer-side">
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+    // Pass some dummy list items here AI!
+    <SidebarList/>
   </div>
 </div>
 
