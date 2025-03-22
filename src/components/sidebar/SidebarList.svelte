@@ -13,7 +13,7 @@
       <details open>
         <summary><Folder /> Parent</summary>
         <ul>
-          <li><a>Submenu 1</a></li>
+          <li><a class="menu-active">Submenu 1</a></li>
           <li><a>Submenu 2</a></li>
           <li>
             <details open>
