@@ -1,9 +1,9 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 export interface Note {
   id: number;
   title: string;
-  type: 'file' | 'folder';
+  type: "file" | "folder";
   children?: Note[];
 }
 
