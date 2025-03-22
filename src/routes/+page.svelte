@@ -39,7 +39,7 @@
 <div class="app-container h-screen flex flex-col">
   <div class="navbar bg-base-100 shadow-sm">
     <div class="flex-none">
-      <button class="btn btn-square btn-ghost" on:click={toggleSidebar}>
+      <button class="btn btn-square btn-ghost" onclick={toggleSidebar}>
         <LucideSidebar />
       </button>
     </div>
