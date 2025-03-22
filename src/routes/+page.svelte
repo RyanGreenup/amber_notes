@@ -23,7 +23,7 @@
 
 <div class="navbar bg-base-100 shadow-sm z-10">
   <div class="flex-none">
-    <button class="btn btn-ghost drawer-button lg:hidden" on:click={toggleDrawer}>
+    <button class="btn btn-ghost drawer-button lg:hidden" onclick={toggleDrawer}>
       <IconHamburger />
     </button>
   </div>
