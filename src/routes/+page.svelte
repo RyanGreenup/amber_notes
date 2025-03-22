@@ -13,51 +13,9 @@
     greetMsg = await invoke("greet", { name });
   }
 
-  function toggleDrawer() {
-    const drawer = document.getElementById("my-drawer-2") as HTMLInputElement;
-    if (drawer) {
-      drawer.checked = !drawer.checked;
-    }
-  }
 </script>
 
-<div class="navbar bg-base-100 shadow-sm z-10">
-  <div class="flex-none">
-    <button
-      class="btn btn-ghost drawer-button lg:hidden"
-      onclick={toggleDrawer}
-    >
-      <IconHamburger />
-    </button>
-  </div>
-  <div class="flex-1">
-    <a class="btn btn-ghost text-xl">daisyUI</a>
-  </div>
-  <div class="flex-none">
-    <button class="btn btn-square btn-ghost">
-      <IconSidewaysHamburger />
-    </button>
-  </div>
-</div>
 
-<div class="drawer lg:drawer-open">
-  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex flex-col">
-    <!-- Page content here -->
-  </div>
-  <div class="drawer-side">
-    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"
-    ></label>
-    <SidebarList
-      items={[
-        { label: "Dashboard", href: "/" },
-        { label: "Notes", href: "/notes" },
-        { label: "Settings", href: "/settings" },
-        { label: "About", href: "/about" },
-      ]}
-    />
-  </div>
-</div>
 
 <main class="container">
   <h1>Welcome to Tauri + Svelte</h1>
