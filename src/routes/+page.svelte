@@ -14,25 +14,26 @@
   }
 </script>
 
-<div class="drawer lg:drawer-open">
+<div class="navbar bg-base-100 shadow-sm fixed top-0 z-10 w-full">
+  <div class="flex-none">
+    <label for="my-drawer-2" class="btn btn-square btn-ghost drawer-button">
+      <IconHamburger/>
+    </label>
+  </div>
+  <div class="flex-1">
+    <a class="btn btn-ghost text-xl">daisyUI</a>
+  </div>
+  <div class="flex-none">
+    <button class="btn btn-square btn-ghost">
+      <IconSidewaysHamburger/>
+    </button>
+  </div>
+</div>
+
+<div class="drawer lg:drawer-open pt-16">
   <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col items-center justify-center">
     <!-- Page content here -->
-    <div class="navbar bg-base-100 shadow-sm">
-      <div class="flex-none">
-        <button class="btn btn-square btn-ghost">
-        <IconHamburger/>
-        </button>
-      </div>
-      <div class="flex-1">
-        <a class="btn btn-ghost text-xl">daisyUI</a>
-      </div>
-      <div class="flex-none">
-        <button class="btn btn-square btn-ghost">
-        <IconSidewaysHamburger/>
-        </button>
-      </div>
-    </div>
     <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
       Open drawer
     </label>
