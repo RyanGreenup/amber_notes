@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { LucideSidebar, Search } from "@lucide/svelte";
-  
+  import { Divide, LucideSidebar, Search, SeparatorVertical } from "@lucide/svelte";
+  import DarkModeToggle from "../buttons/DarkModeToggle.svelte";
+  import SearchButton from "../buttons/SearchButton.svelte";
+
   export let toggleSidebar: () => void;
 </script>
 
@@ -13,9 +15,8 @@
   <div class="flex-1">
     <a class="btn btn-ghost text-xl">AmberNotes</a>
   </div>
+  <SearchButton />
   <div class="flex-none">
-    <button class="btn btn-square btn-ghost">
-      <Search size={20} />
-    </button>
+    <DarkModeToggle />
   </div>
 </div>
