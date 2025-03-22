@@ -43,8 +43,12 @@
   </div>
   <div class="drawer-side">
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
-    // Pass some dummy list items here AI!
-    <SidebarList/>
+    <SidebarList items={[
+      { label: "Dashboard", href: "/" },
+      { label: "Notes", href: "/notes" },
+      { label: "Settings", href: "/settings" },
+      { label: "About", href: "/about" }
+    ]}/>
   </div>
 </div>
 
