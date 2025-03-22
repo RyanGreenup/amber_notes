@@ -12,7 +12,7 @@
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
     greetMsg = await invoke("greet", { name });
   }
-  
+
   function toggleDrawer() {
     const drawer = document.getElementById("my-drawer-2") as HTMLInputElement;
     if (drawer) {
@@ -23,7 +23,10 @@
 
 <div class="navbar bg-base-100 shadow-sm z-10">
   <div class="flex-none">
-    <button class="btn btn-ghost drawer-button lg:hidden" onclick={toggleDrawer}>
+    <button
+      class="btn btn-ghost drawer-button lg:hidden"
+      onclick={toggleDrawer}
+    >
       <IconHamburger />
     </button>
   </div>
