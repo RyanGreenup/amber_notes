@@ -3,3 +3,7 @@ serve:
 
 build:
     pnpm tauri build
+
+fmt:
+    npx prettier --write **/**/*.svelte
+    npx prettier --write **/**/*.ts
