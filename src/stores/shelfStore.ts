@@ -37,12 +37,10 @@ export interface ShelfMap {
  * @param parent_id - The ID of the parent shelf (currently unused)
  * @returns A map of shelf objects indexed by their IDs
  *
- *
  */
-// Fix this function AI!
 export function get_shelves(parent_id: string): ShelfMap {
   let shelves_list: Shelf[] = [
-    { id: "000", title: "000", description: "Computer science, information & general works", },
+    { id: "000", title: "000", description: "Computer science, information & general works" },
     { id: "100", title: "100", description: "Philosophy & psychology" },
     { id: "200", title: "200", description: "Religion" },
     { id: "300", title: "300", description: "Social sciences" },
@@ -54,16 +52,19 @@ export function get_shelves(parent_id: string): ShelfMap {
     { id: "900", title: "900", description: "History & geography" },
   ];
 
-  let shelves: ShelfMap = {}
+  let shelves: ShelfMap = {};
 
-  for (shelf in shelves_list) {
-      shelves[shelf.id] = shelf
+  // Properly iterate through the shelves_list array
+  for (const shelf of shelves_list) {
+    shelves[shelf.id] = shelf;
   }
 
-
-  for (const id in shelves) {
-    shelves[id].title = parent_id + "/" + shelves[id].title;
-    shelves[id].id = parent_id + "/" + shelves[id].id;
+  // Only modify the IDs and titles if parent_id is provided
+  if (parent_id && parent_id.trim() !== "") {
+    for (const id in shelves) {
+      shelves[id].title = parent_id + "/" + shelves[id].title;
+      shelves[id].id = parent_id + "/" + shelves[id].id;
+    }
   }
 
   return shelves;
