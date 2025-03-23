@@ -1,4 +1,5 @@
 <script>
+//AI:  The Sidebarlist is defined here
   import {
     Edit,
     Edit2,
@@ -22,11 +23,10 @@
     "600": { title: "800", description: "Literature" },
     "700": { title: "900", description: "History & geography" },
   };
-  // This is a list of note categories that the user will click to choose view a category.
 </script>
 
-<ul class="list bg-base-100 rounded-box shadow-md">
-  <li class="p-4 pb-2 text-xs opacity-60 tracking-wide flex justify-between items-center">
+<ul class="my-shelf-list">
+  <li class="my-shelf-list-item">
     <span>Shelves</span>
     <button class="btn btn-ghost btn-xs rounded-full">
       <ArrowUp size={16} />

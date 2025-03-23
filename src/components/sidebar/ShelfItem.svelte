@@ -1,4 +1,5 @@
 <script lang="ts">
+// AI: Shelf Items are defined here
   import { Edit, Heart, Bookmark, BookOpen, LibraryIcon } from "@lucide/svelte";
   export let buttons: Boolean = false;
   export let title: string = "";
@@ -7,6 +8,7 @@
   export let size_class = "size-[1.2em]";
   export let noteCount: number = 0;
   export let isActive: boolean = false;
+  export let id: string;
 </script>
 
 <li class="shelf-item {isActive ? 'active' : ''}">

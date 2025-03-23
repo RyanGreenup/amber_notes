@@ -16,7 +16,7 @@
   $: rootNotes = getRootNotes();
 
   /* For Devel */
-  const shelves = get_shelves("");
+  const shelves = get_shelves("root");
 </script>
 
 <div
@@ -24,15 +24,9 @@
     ? 'w-64'
     : 'w-0'} transition-all duration-300 overflow-hidden flex flex-col"
 >
-  <div class="p-4 flex justify-between items-center">
-    <h2 class="font-bold">Notes</h2>
-    <button class="btn btn-sm btn-ghost btn-circle">
-      <Plus size={18} />
-    </button>
-  </div>
-
+// When the user selects a shelf in the sidebar list the shelves corresponding to that parent ID should be set AI!
+  <SidebarList {shelves} />
   <!-- <SidebarTree note_list={rootNotes} /> -->
-  <SidebarList />
 </div>
 
 <style>
