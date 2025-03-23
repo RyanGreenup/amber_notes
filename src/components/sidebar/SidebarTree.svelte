@@ -3,8 +3,7 @@
   import type { Note } from "../../stores/notesStore";
   import { findNoteById } from "../../stores/notesStore";
 
-// No notes are displayed in the sidebar, fix this AI!
-  let note_list: Note[] = [];
+  export let note_list: Note[] = [];
 </script>
 
 <div class="sidebar-content flex-1 overflow-y-auto">

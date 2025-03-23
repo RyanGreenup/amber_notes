@@ -25,7 +25,6 @@
       <Plus size={18} />
     </button>
   </div>
-  // AI:  This component is used here
   <SidebarTree note_list={rootNotes} />
 </div>
 
