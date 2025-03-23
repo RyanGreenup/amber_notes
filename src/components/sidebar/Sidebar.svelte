@@ -8,6 +8,7 @@
   } from "../../stores/notesStore";
   import { onMount } from "svelte";
   import SidebarTree from "./SidebarTree.svelte";
+  import SidebarList from "./SidebarList.svelte";
 
   export let isOpen: boolean = true;
 
@@ -25,7 +26,27 @@
       <Plus size={18} />
     </button>
   </div>
+
+
+
+
+
+
+
+
+  // AI: The component is used here
   <SidebarTree note_list={rootNotes} />
+
+
+
+
+
+
+
+
+
+
+  <!-- <SidebarList note_list={rootNotes} /> -->
 </div>
 
 <style>
