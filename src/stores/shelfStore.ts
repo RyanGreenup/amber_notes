@@ -103,23 +103,8 @@ export function get_shelves(parent_id: string): ShelfMap {
     { id: "900", title: "900", description: "History & geography" },
   ];
 
-  let shelves: ShelfMap = {};
-
-  // Use the transformShelvesToMap function here instead AI!
-
-  // Properly iterate through the shelves_list array
-  for (const shelf of shelves_list) {
-    const item_id = parent_id + "/" + shelf.id;
-    shelves[item_id] = shelf;
-  }
-
-  // Only modify the IDs and titles if parent_id is provided
-  if (parent_id && parent_id.trim() !== "") {
-    for (const id in shelves) {
-      shelves[id].title = parent_id + "/" + shelves[id].title;
-      shelves[id].id = parent_id + "/" + shelves[id].id;
-    }
-  }
+  // Transform the shelves list into a map using the utility function
+  let shelves: ShelfMap = transformShelvesToMap(shelves_list, parent_id);
 
   return shelves;
 }
