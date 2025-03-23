@@ -27,7 +27,13 @@ export interface ShelfMap {
   [id: string]: Shelf;
 }
 
-// Add a simple docstring AI!
+/**
+ * Returns a map of shelves based on the Dewey Decimal Classification system.
+ * Each shelf represents a main category in the classification.
+ * 
+ * @param parent_id - The ID of the parent shelf (currently unused)
+ * @returns A map of shelf objects indexed by their IDs
+ */
 export function get_shelves(parent_id: String): ShelfMap {
   const shelves: ShelfMap = {
     "000": {
