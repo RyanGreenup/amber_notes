@@ -39,41 +39,31 @@ export interface ShelfMap {
  *
  *
  */
+// Fix this function AI!
 export function get_shelves(parent_id: string): ShelfMap {
-  let shelves: ShelfMap = {
-    "000": {
-      id: "000",
-      title: "000",
-      description: "Computer science, information & general works",
-    },
-    "100": { id: "100", title: "100", description: "Philosophy & psychology" },
-    "200": { id: "200", title: "200", description: "Religion" },
-    "300": { id: "300", title: "300", description: "Social sciences" },
-    "400": { id: "400", title: "400", description: "Language" },
-    "500": { id: "500", title: "500", description: "Science" },
-    "600": { id: "600", title: "600", description: "Technology" },
-    "700": { id: "700", title: "700", description: "Arts & recreation" },
-    "800": { id: "800", title: "800", description: "Literature" },
-    "900": { id: "900", title: "900", description: "History & geography" },
-  };
+  let shelves_list: Shelf[] = [
+    { id: "000", title: "000", description: "Computer science, information & general works", },
+    { id: "100", title: "100", description: "Philosophy & psychology" },
+    { id: "200", title: "200", description: "Religion" },
+    { id: "300", title: "300", description: "Social sciences" },
+    { id: "400", title: "400", description: "Language" },
+    { id: "500", title: "500", description: "Science" },
+    { id: "600", title: "600", description: "Technology" },
+    { id: "700", title: "700", description: "Arts & recreation" },
+    { id: "800", title: "800", description: "Literature" },
+    { id: "900", title: "900", description: "History & geography" },
+  ];
+
+  let shelves: ShelfMap = {}
+
+  for (shelf in shelves_list) {
+      shelves[shelf.id] = shelf
+  }
 
 
-
-
-  // Create nested IDs based on parent selection
-  if (parent_id !== "root") {
-    // For non-root shelves, create proper nesting structure
-    for (const id in shelves) {
-      // Extract the base number from the original ID
-      const baseNumber = id;
-      
-      // Create a properly nested ID that gets longer with each selection
-      shelves[id].id = parent_id + "/" + baseNumber;
-      
-      // Format the title to show the hierarchy
-      const baseName = shelves[id].title;
-      shelves[id].title = baseName + " (in " + parent_id + ")";
-    }
+  for (const id in shelves) {
+    shelves[id].title = parent_id + "/" + shelves[id].title;
+    shelves[id].id = parent_id + "/" + shelves[id].id;
   }
 
   return shelves;
