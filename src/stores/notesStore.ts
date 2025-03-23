@@ -1,19 +1,22 @@
-import { writable } from "svelte/store";
+import { writable, get } from "svelte/store";
 
 export interface Note {
   id: number;
   title: string;
   type: "file" | "folder";
   content?: string;
-  children?: Note[];
+  children?: number[];
   createdAt?: Date;
   updatedAt?: Date;
 }
 
+export interface NotesMap {
+  [id: number]: Note;
+}
+
 // Mock data for sidebar
-// Refactor this into a hashmap that is indexed by id, the key should be the id but the object should have the id as well. AI!
-const initialNotes: Note[] = [
-  {
+const initialNotesMap: NotesMap = {
+  1: {
     id: 1,
     title: "Welcome Note",
     type: "file",
@@ -22,7 +25,7 @@ const initialNotes: Note[] = [
     createdAt: new Date("2025-01-15"),
     updatedAt: new Date("2025-01-15"),
   },
-  {
+  2: {
     id: 2,
     title: "Getting Started",
     type: "file",
@@ -31,34 +34,33 @@ const initialNotes: Note[] = [
     createdAt: new Date("2025-01-16"),
     updatedAt: new Date("2025-02-01"),
   },
-  {
+  3: {
     id: 3,
     title: "Projects",
     type: "folder",
-    children: [
-      {
-        id: 4,
-        title: "Project A",
-        type: "file",
-        content:
-          "# Project A\n\n## Objectives\n\n- Implement core functionality\n- Design user interface\n- Test with users\n\n## Timeline\n\n- Phase 1: Planning (2 weeks)\n- Phase 2: Development (4 weeks)\n- Phase 3: Testing (2 weeks)\n- Phase 4: Deployment (1 week)",
-        createdAt: new Date("2025-02-10"),
-        updatedAt: new Date("2025-02-15"),
-      },
-      {
-        id: 5,
-        title: "Project B",
-        type: "file",
-        content:
-          "# Project B\n\n## Requirements\n\n- User authentication system\n- Data synchronization\n- Offline support\n- Cross-platform compatibility\n\n## Resources\n\n- 2 developers\n- 1 designer\n- 1 QA engineer",
-        createdAt: new Date("2025-02-20"),
-        updatedAt: new Date("2025-03-01"),
-      },
-    ],
+    children: [4, 5],
     createdAt: new Date("2025-02-10"),
     updatedAt: new Date("2025-03-01"),
   },
-  {
+  4: {
+    id: 4,
+    title: "Project A",
+    type: "file",
+    content:
+      "# Project A\n\n## Objectives\n\n- Implement core functionality\n- Design user interface\n- Test with users\n\n## Timeline\n\n- Phase 1: Planning (2 weeks)\n- Phase 2: Development (4 weeks)\n- Phase 3: Testing (2 weeks)\n- Phase 4: Deployment (1 week)",
+    createdAt: new Date("2025-02-10"),
+    updatedAt: new Date("2025-02-15"),
+  },
+  5: {
+    id: 5,
+    title: "Project B",
+    type: "file",
+    content:
+      "# Project B\n\n## Requirements\n\n- User authentication system\n- Data synchronization\n- Offline support\n- Cross-platform compatibility\n\n## Resources\n\n- 2 developers\n- 1 designer\n- 1 QA engineer",
+    createdAt: new Date("2025-02-20"),
+    updatedAt: new Date("2025-03-01"),
+  },
+  6: {
     id: 6,
     title: "Ideas",
     type: "folder",
@@ -66,7 +68,7 @@ const initialNotes: Note[] = [
     createdAt: new Date("2025-03-10"),
     updatedAt: new Date("2025-03-10"),
   },
-];
+};
 
 export const notes = writable<Note[]>(initialNotes);
 
