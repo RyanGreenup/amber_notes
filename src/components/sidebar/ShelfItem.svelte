@@ -9,14 +9,34 @@
   export let noteCount: number = 0;
   export let isActive: boolean = false;
   export let id: string;
+  export let type: string;
 </script>
 
-<li 
+<li
   class="shelf-item {isActive ? 'active' : ''}"
   on:click={() => selectedShelfId.set(id)}
 >
   <div class="shelf-icon">
+
+
+
+// Fix this AI!
+
+    if (type === "terminal") {
     <LibraryIcon class="{extra_classes} {size_class}" />
+    } elif (type === "hierarchy_shelf") {
+
+    } else {
+        <b>Bad Type</b>
+        }
+
+
+
+
+
+
+
+
   </div>
   <div class="shelf-content">
     <div class="shelf-title">{title}</div>
