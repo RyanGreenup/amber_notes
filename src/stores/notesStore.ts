@@ -82,5 +82,15 @@ export function findNoteById(id: number): Note | null {
   return notes[id] || null;
 }
 
+// Get all notes as an array
+export function getAllNotes(): Note[] {
+  const notes = get(notesMap);
+  return Object.values(notes);
+}
 
-// Write a function that returns the notes AI!
+// Get root notes (top level notes)
+export function getRootNotes(): Note[] {
+  const notes = get(notesMap);
+  const rootIds = get(rootNoteIds);
+  return rootIds.map(id => notes[id]).filter(note => note !== undefined);
+}
