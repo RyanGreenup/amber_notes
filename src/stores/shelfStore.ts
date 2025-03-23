@@ -94,13 +94,17 @@ export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
  * which can only contain books, not other shelves.
  *
  * @param parent_id - The ID of the parent shelf
- * @returns A map of shelf or terminal shelf objects indexed by their IDs
+ * @returns A map of shelf, terminal shelf, or book objects indexed by their IDs
  */
-// If it's a terminal shelf, use get_books to return a BookMap AI!
-export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
+export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap | BookMap {
   // Count the number of slashes in parent_id
   const slashCount = (parent_id.match(/\//g) || []).length;
 
+  // If we're at a very deep level (more than 4 slashes), return books
+  if (slashCount > 4) {
+    return get_books(parent_id);
+  }
+  
   // If we're at a deep level (more than 3 slashes), return terminal shelves
   if (slashCount > 3) {
     const terminalShelves: TerminalShelf[] = [
