@@ -96,6 +96,7 @@ export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
  * @param parent_id - The ID of the parent shelf
  * @returns A map of shelf or terminal shelf objects indexed by their IDs
  */
+// If it's a terminal shelf, use get_books to return a BookMap AI!
 export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
   // Count the number of slashes in parent_id
   const slashCount = (parent_id.match(/\//g) || []).length;
@@ -166,7 +167,7 @@ export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
 
 /**
  * Returns a map of books from the database / API
- * 
+ *
  * @param parent_id - The ID of the parent shelf
  * @returns A map of book objects indexed by their IDs
  */
@@ -177,29 +178,29 @@ export function get_books(parent_id: string): BookMap {
       title: "Introduction to Programming",
       description: "A beginner's guide to programming concepts",
       children: [],
-      type: ShelfType.BOOK
+      type: ShelfType.BOOK,
     },
     {
       id: "book2",
       title: "Advanced Data Structures",
       description: "In-depth exploration of complex data structures",
       children: [],
-      type: ShelfType.BOOK
+      type: ShelfType.BOOK,
     },
     {
       id: "book3",
       title: "Web Development Fundamentals",
       description: "Essential concepts for modern web development",
       children: [],
-      type: ShelfType.BOOK
+      type: ShelfType.BOOK,
     },
     {
       id: "book4",
       title: "Machine Learning Basics",
       description: "Introduction to machine learning algorithms",
       children: [],
-      type: ShelfType.BOOK
-    }
+      type: ShelfType.BOOK,
+    },
   ];
 
   return transformShelvesToMap(books, parent_id);
