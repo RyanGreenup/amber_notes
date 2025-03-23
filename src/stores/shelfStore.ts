@@ -1,6 +1,8 @@
 import { writable, get } from "svelte/store";
 import type { Note } from "./notesStore.ts";
 
+// Combine the Shelf and TerminalShelf into a single type AI!
+
 export enum ShelfType {
   BOOK = "book_object_type",
   HIERARCHY = "hierarchy_shelf_type",
@@ -96,7 +98,9 @@ export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
  * @param parent_id - The ID of the parent shelf
  * @returns A map of shelf, terminal shelf, or book objects indexed by their IDs
  */
-export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap | BookMap {
+export function get_shelves(
+  parent_id: string,
+): ShelfMap | TerminalShelfMap | BookMap {
   // Count the number of slashes in parent_id
   const slashCount = (parent_id.match(/\//g) || []).length;
 
@@ -104,7 +108,7 @@ export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap | Bo
   if (slashCount > 4) {
     return get_books(parent_id);
   }
-  
+
   // If we're at a deep level (more than 3 slashes), return terminal shelves
   if (slashCount > 3) {
     const terminalShelves: TerminalShelf[] = [
