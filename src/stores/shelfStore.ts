@@ -40,9 +40,30 @@ export interface TerminalShelf {
 }
 
 
-// Create a method that transforms a list of shelves into a ShelfMap AI!
 export interface ShelfMap {
   [id: string]: Shelf;
+}
+
+/**
+ * Transforms a list of shelves into a ShelfMap
+ * 
+ * @param shelves - Array of Shelf objects to transform
+ * @param parentId - Optional parent ID to prefix shelf IDs
+ * @returns A map of shelf objects indexed by their IDs
+ */
+export function transformShelvesToMap(shelves: Shelf[], parentId?: string): ShelfMap {
+  const shelfMap: ShelfMap = {};
+  
+  for (const shelf of shelves) {
+    const id = parentId ? `${parentId}/${shelf.id}` : shelf.id;
+    shelfMap[id] = {
+      ...shelf,
+      id: id,
+      title: parentId ? `${parentId}/${shelf.title}` : shelf.title
+    };
+  }
+  
+  return shelfMap;
 }
 
 export interface TerminalShelfMap {
