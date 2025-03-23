@@ -13,6 +13,7 @@ export interface Book {
   title: string;
   description: string;
   children: Folder[];
+  type: "book_object_type";
 }
 
 // shelves can contain other shelves
@@ -22,6 +23,7 @@ export interface Shelf {
   id: string;
   title: string;
   description: string;
+  type: "hierarchy_shelf_type";
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -32,10 +34,9 @@ export interface TerminalShelf {
   id: string;
   title: string;
   description: string;
-  type: "terminal"; // Cannot contain other shelves, only books
+  type: "terminal_shelf_type"; // Cannot contain other shelves, only books
   createdAt?: Date;
   updatedAt?: Date;
-  books: Book[]; // Only books, no shelves
 }
 
 export interface ShelfMap {
@@ -88,7 +89,7 @@ export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
 export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
   // Count the number of slashes in parent_id
   const slashCount = (parent_id.match(/\//g) || []).length;
-  
+
   // If we're at a deep level (more than 3 slashes), return terminal shelves
   if (slashCount > 3) {
     const terminalShelves: TerminalShelf[] = [
@@ -96,42 +97,37 @@ export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
         id: "001",
         title: "001",
         description: "Knowledge",
-        type: "terminal",
-        books: []
+        type: "terminal_shelf_type",
       },
       {
         id: "002",
         title: "002",
         description: "The book",
-        type: "terminal",
-        books: []
+        type: "terminal_shelf_type",
       },
       {
         id: "003",
         title: "003",
         description: "Systems",
-        type: "terminal",
-        books: []
+        type: "terminal_shelf_type",
       },
       {
         id: "004",
         title: "004",
         description: "Data processing & Computer science",
-        type: "terminal",
-        books: []
+        type: "terminal_shelf_type",
       },
       {
         id: "005",
         title: "005",
         description: "Computer programming",
-        type: "terminal",
-        books: []
-      }
+        type: "terminal_shelf_type",
+      },
     ];
-    
+
     return transformShelvesToMap(terminalShelves, parent_id);
   }
-  
+
   // Otherwise return regular shelves
   let shelves_list: Shelf[] = [
     {
@@ -150,6 +146,11 @@ export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
     { id: "900", title: "900", description: "History & geography" },
   ];
 
+  for (const item_id in shelves_list) {
+    shelves_list[item_id].type = "hierarchy_shelf_type";
+  }
+
   // Transform the shelves list into a map using the utility function
   return transformShelvesToMap(shelves_list, parent_id);
 }
+
