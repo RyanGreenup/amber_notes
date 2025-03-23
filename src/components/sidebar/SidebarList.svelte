@@ -13,14 +13,24 @@
 
   /* For debugging and dev */
   export let shelves = {
-    "000": {
-      title: "000",
-      description: "Computer science, information & general works",
+    "1": {
+      id: "1",
+      title: "Shelf 1",
+      description: "This is the first shelf",
+      type: "hierarchy_shelf",
     },
-    "100": { title: "100", description: "Philosophy & psychology" },
-    "200": { title: "200", description: "Religion" },
-    "600": { title: "800", description: "Literature" },
-    "700": { title: "900", description: "History & geography" },
+    "2": {
+      id: "2",
+      title: "Shelf 2",
+      description: "This is the second shelf",
+      type: "hierarchy_shelf",
+    },
+    "3": {
+      id: "3",
+      title: "Shelf 3",
+      description: "This is the third shelf",
+      type: "hierarchy_shelf",
+    },
   };
 </script>
 
@@ -32,7 +42,7 @@
     </button>
   </li>
 
-  {#each Object.entries(shelves) as [id, { title, description }]}
-    <ShelfItem {id} {title} {description} />
+  {#each Object.entries(shelves) as [id, { title, description, type }]}
+    <ShelfItem {id} {title} {description} {type} />
   {/each}
 </ul>

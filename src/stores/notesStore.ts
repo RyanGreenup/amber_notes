@@ -92,7 +92,5 @@ export function getAllNotes(): Note[] {
 export function getRootNotes(): Note[] {
   const notes = get(notesMap);
   const rootIds = get(rootNoteIds);
-  return rootIds.map(id => notes[id]).filter(note => note !== undefined);
+  return rootIds.map((id) => notes[id]).filter((note) => note !== undefined);
 }
-
-

@@ -9,7 +9,7 @@
   } from "@lucide/svelte";
   import { selectedShelfId } from "../../stores/selectedShelfStore";
   import { ShelfType } from "../../stores/shelfStore";
-  
+
   export let buttons: Boolean = false;
   export let title: string = "";
   export let description: string = "";

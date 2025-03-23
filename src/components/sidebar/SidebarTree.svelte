@@ -6,6 +6,13 @@
   export let note_list: Note[] = [];
 </script>
 
+<div class="p-4 flex justify-between items-center">
+  <h2 class="font-bold">Notes</h2>
+  <button class="btn btn-sm btn-ghost btn-circle">
+    <Plus size={18} />
+  </button>
+</div>
+
 <div class="sidebar-content flex-1 overflow-y-auto">
   <ul class="menu p-2 gap-1">
     {#each note_list as note}

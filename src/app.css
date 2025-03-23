@@ -2,3 +2,11 @@
 @plugin "daisyui" {
   themes: "all";
 }
+
+.my-shelf-list-item {
+  @apply p-4 pb-2 text-xs opacity-60 tracking-wide flex justify-between items-center;
+}
+
+.my-shelf-list {
+  @apply list bg-base-100 rounded-box shadow-md;
+}

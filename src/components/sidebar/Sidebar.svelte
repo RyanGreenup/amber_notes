@@ -15,13 +15,13 @@
   export let isOpen: boolean = true;
 
   $: rootNotes = getRootNotes();
-  
+
   // Default to root shelves
   let currentParentId = "root";
   let shelves = get_shelves(currentParentId);
-  
+
   // Update shelves when selected shelf changes
-  selectedShelfId.subscribe(id => {
+  selectedShelfId.subscribe((id) => {
     if (id) {
       currentParentId = id;
       shelves = get_shelves(id);
