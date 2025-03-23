@@ -1,5 +1,5 @@
 import { writable, get } from "svelte/store";
-import { Note } from "./notesStore.ts";
+import type { Note } from "./notesStore.ts";
 
 export interface Folder {
   id: string;
@@ -19,12 +19,32 @@ export interface Shelf {
   id: string;
   title: string;
   description: string;
-  content?: string;
-  children?: string[] | number[];
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-function get_shelves(parent_id: String) {
-  console.log("Not Implemented");
+export interface ShelfMap {
+  [id: string]: Shelf;
+}
+
+// Add a simple docstring AI!
+export function get_shelves(parent_id: String): ShelfMap {
+  const shelves: ShelfMap = {
+    "000": {
+      id: "000",
+      title: "000",
+      description: "Computer science, information & general works",
+    },
+    "100": { id: "100", title: "100", description: "Philosophy & psychology" },
+    "200": { id: "200", title: "200", description: "Religion" },
+    "300": { id: "300", title: "300", description: "Social sciences" },
+    "400": { id: "400", title: "400", description: "Language" },
+    "500": { id: "500", title: "500", description: "Science" },
+    "600": { id: "600", title: "600", description: "Technology" },
+    "700": { id: "700", title: "700", description: "Arts & recreation" },
+    "800": { id: "800", title: "800", description: "Literature" },
+    "900": { id: "900", title: "900", description: "History & geography" },
+  };
+
+  return shelves;
 }
