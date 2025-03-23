@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Edit, Heart, Bookmark, BookOpen } from "@lucide/svelte";
+  import { Edit, Heart, Bookmark, BookOpen, LibraryIcon } from "@lucide/svelte";
   export let buttons: Boolean = false;
   export let title: string = "";
   export let description: string = "";
@@ -11,7 +11,7 @@
 
 <li class="shelf-item {isActive ? 'active' : ''}">
   <div class="shelf-icon">
-    <Bookmark class="{extra_classes} {size_class}" />
+    <LibraryIcon class="{extra_classes} {size_class}" />
   </div>
   <div class="shelf-content">
     <div class="shelf-title">{title}</div>
@@ -41,7 +41,9 @@
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
-    transition: background-color 0.2s, transform 0.1s;
+    transition:
+      background-color 0.2s,
+      transform 0.1s;
     cursor: pointer;
     gap: 0.75rem;
   }

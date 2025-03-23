@@ -27,16 +27,7 @@
     </button>
   </div>
 
-
-
-
   <SidebarTree note_list={rootNotes} />
-
-
-
-
-
-
 
   <!-- <SidebarList note_list={rootNotes} /> -->
 </div>
