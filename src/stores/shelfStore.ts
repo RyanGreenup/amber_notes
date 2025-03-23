@@ -4,7 +4,7 @@ import type { Note } from "./notesStore.ts";
 export enum ShelfType {
   BOOK = "book_object_type",
   HIERARCHY = "hierarchy_shelf_type",
-  TERMINAL = "terminal_shelf_type"
+  TERMINAL = "terminal_shelf_type",
 }
 
 export interface Folder {
@@ -47,6 +47,10 @@ export interface TerminalShelf {
 
 export interface ShelfMap {
   [id: string]: Shelf;
+}
+
+export interface BookMap {
+  [id: string]: Book;
 }
 
 export interface TerminalShelfMap {
@@ -160,3 +164,8 @@ export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
   return transformShelvesToMap(shelves_list, parent_id);
 }
 
+
+
+// Finish this function AI!
+export function get_shelves(parent_id: string): BookMap {
+}
