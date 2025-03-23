@@ -70,18 +70,14 @@ const initialNotesMap: NotesMap = {
   },
 };
 
-export const notes = writable<Note[]>(initialNotes);
+// Store for the notes map
+export const notesMap = writable<NotesMap>(initialNotesMap);
 
-// Helper function to find a note by ID
-export function findNoteById(notes: Note[], id: number): Note | null {
-  for (const note of notes) {
-    if (note.id === id) {
-      return note;
-    }
-    if (note.children) {
-      const found = findNoteById(note.children, id);
-      if (found) return found;
-    }
-  }
-  return null;
+// Store for the root note IDs (top-level notes)
+export const rootNoteIds = writable<number[]>([1, 2, 3, 6]);
+
+// Helper function to find a note by ID - now much simpler with the hashmap
+export function findNoteById(id: number): Note | null {
+  const notes = get(notesMap);
+  return notes[id] || null;
 }
