@@ -10,13 +10,23 @@
   import SidebarTree from "./SidebarTree.svelte";
   import SidebarList from "./SidebarList.svelte";
   import { get_shelves } from "../../stores/shelfStore.ts";
+  import { selectedShelfId } from "../../stores/selectedShelfStore";
 
   export let isOpen: boolean = true;
 
   $: rootNotes = getRootNotes();
-
-  /* For Devel */
-  const shelves = get_shelves("root");
+  
+  // Default to root shelves
+  let currentParentId = "root";
+  let shelves = get_shelves(currentParentId);
+  
+  // Update shelves when selected shelf changes
+  selectedShelfId.subscribe(id => {
+    if (id) {
+      currentParentId = id;
+      shelves = get_shelves(id);
+    }
+  });
 </script>
 
 <div
@@ -24,7 +34,6 @@
     ? 'w-64'
     : 'w-0'} transition-all duration-300 overflow-hidden flex flex-col"
 >
-// When the user selects a shelf in the sidebar list the shelves corresponding to that parent ID should be set AI!
   <SidebarList {shelves} />
   <!-- <SidebarTree note_list={rootNotes} /> -->
 </div>

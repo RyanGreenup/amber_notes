@@ -1,6 +1,6 @@
 <script lang="ts">
-// AI: Shelf Items are defined here
   import { Edit, Heart, Bookmark, BookOpen, LibraryIcon } from "@lucide/svelte";
+  import { selectedShelfId } from "../../stores/selectedShelfStore";
   export let buttons: Boolean = false;
   export let title: string = "";
   export let description: string = "";
@@ -11,7 +11,10 @@
   export let id: string;
 </script>
 
-<li class="shelf-item {isActive ? 'active' : ''}">
+<li 
+  class="shelf-item {isActive ? 'active' : ''}"
+  on:click={() => selectedShelfId.set(id)}
+>
   <div class="shelf-icon">
     <LibraryIcon class="{extra_classes} {size_class}" />
   </div>

@@ -1,5 +1,4 @@
 <script>
-//AI:  The Sidebarlist is defined here
   import {
     Edit,
     Edit2,
