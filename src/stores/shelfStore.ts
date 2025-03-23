@@ -103,8 +103,9 @@ export function get_shelves(parent_id: string): ShelfMap {
     { id: "900", title: "900", description: "History & geography" },
   ];
 
-
   let shelves: ShelfMap = {};
+
+  // Use the transformShelvesToMap function here instead AI!
 
   // Properly iterate through the shelves_list array
   for (const shelf of shelves_list) {
