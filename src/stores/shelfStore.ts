@@ -42,22 +42,25 @@ export interface ShelfMap {
   [id: string]: Shelf;
 }
 
-// Generalise this so it can work for both a Shelf and TerminalShelf AI!
+export interface TerminalShelfMap {
+  [id: string]: TerminalShelf;
+}
+
 /**
- * Transforms a list of shelves into a ShelfMap
+ * Transforms a list of shelves into a map
  *
  * This is for use in debugging and takes the parent_id to create a nested
  * level of hierarchy for testing purposes
  *
- * @param shelves - Array of Shelf objects to transform
+ * @param shelves - Array of Shelf or TerminalShelf objects to transform
  * @param parentId - Optional parent ID to prefix shelf IDs
  * @returns A map of shelf objects indexed by their IDs
  */
-export function transformShelvesToMap(
-  shelves: Shelf[],
+export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
+  shelves: T[],
   parentId?: string,
-): ShelfMap {
-  const shelfMap: ShelfMap = {};
+): { [id: string]: T } {
+  const shelfMap: { [id: string]: T } = {};
 
   for (const shelf of shelves) {
     const id = parentId ? `${parentId}/${shelf.id}` : shelf.id;
@@ -65,14 +68,10 @@ export function transformShelvesToMap(
       ...shelf,
       id: id,
       title: parentId ? `${parentId}/${shelf.title}` : shelf.title,
-    };
+    } as T;
   }
 
   return shelfMap;
-}
-
-export interface TerminalShelfMap {
-  [id: string]: TerminalShelf;
 }
 
 /**
