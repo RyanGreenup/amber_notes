@@ -164,8 +164,43 @@ export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
   return transformShelvesToMap(shelves_list, parent_id);
 }
 
+/**
+ * Returns a map of books from the database / API
+ * 
+ * @param parent_id - The ID of the parent shelf
+ * @returns A map of book objects indexed by their IDs
+ */
+export function get_books(parent_id: string): BookMap {
+  const books: Book[] = [
+    {
+      id: "book1",
+      title: "Introduction to Programming",
+      description: "A beginner's guide to programming concepts",
+      children: [],
+      type: ShelfType.BOOK
+    },
+    {
+      id: "book2",
+      title: "Advanced Data Structures",
+      description: "In-depth exploration of complex data structures",
+      children: [],
+      type: ShelfType.BOOK
+    },
+    {
+      id: "book3",
+      title: "Web Development Fundamentals",
+      description: "Essential concepts for modern web development",
+      children: [],
+      type: ShelfType.BOOK
+    },
+    {
+      id: "book4",
+      title: "Machine Learning Basics",
+      description: "Introduction to machine learning algorithms",
+      children: [],
+      type: ShelfType.BOOK
+    }
+  ];
 
-
-// Finish this function AI!
-export function get_shelves(parent_id: string): BookMap {
+  return transformShelvesToMap(books, parent_id);
 }
