@@ -81,3 +81,6 @@ export function findNoteById(id: number): Note | null {
   const notes = get(notesMap);
   return notes[id] || null;
 }
+
+
+// Write a function that returns the notes AI!
