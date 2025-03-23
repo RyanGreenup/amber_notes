@@ -11,6 +11,7 @@ export interface Note {
 }
 
 // Mock data for sidebar
+// Refactor this into a hashmap that is indexed by id, the key should be the id but the object should have the id as well. AI!
 const initialNotes: Note[] = [
   {
     id: 1,
