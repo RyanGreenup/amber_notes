@@ -15,6 +15,9 @@ export interface Book {
   children: Folder[];
 }
 
+// shelves can contain other shelves
+// Maybe we'll call these aisles?
+// Correspond to the x's in xxx.yyyy for dewey decimal
 export interface Shelf {
   id: string;
   title: string;
@@ -22,6 +25,20 @@ export interface Shelf {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+
+// This is the physical timber on a bookshelf, like the tier/actual shelf/row
+// this can only contain books
+export interface TerminalShelf {
+  id: string;
+  title: string;
+  description: string;
+  type: "terminal"; // Cannot contain other shelves, only books
+  createdAt?: Date;
+  updatedAt?: Date;
+  books: Book[]; // Only books, no shelves
+}
+
 
 export interface ShelfMap {
   [id: string]: Shelf;
@@ -40,7 +57,11 @@ export interface ShelfMap {
  */
 export function get_shelves(parent_id: string): ShelfMap {
   let shelves_list: Shelf[] = [
-    { id: "000", title: "000", description: "Computer science, information & general works" },
+    {
+      id: "000",
+      title: "000",
+      description: "Computer science, information & general works",
+    },
     { id: "100", title: "100", description: "Philosophy & psychology" },
     { id: "200", title: "200", description: "Religion" },
     { id: "300", title: "300", description: "Social sciences" },
@@ -56,7 +77,8 @@ export function get_shelves(parent_id: string): ShelfMap {
 
   // Properly iterate through the shelves_list array
   for (const shelf of shelves_list) {
-    shelves[shelf.id] = shelf;
+    const item_id = parent_id + "/" + shelf.id;
+    shelves[item_id] = shelf;
   }
 
   // Only modify the IDs and titles if parent_id is provided
