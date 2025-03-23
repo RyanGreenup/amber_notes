@@ -40,8 +40,13 @@ export interface TerminalShelf {
 }
 
 
+// Create a method that transforms a list of shelves into a ShelfMap AI!
 export interface ShelfMap {
   [id: string]: Shelf;
+}
+
+export interface TerminalShelfMap {
+  [id: string]: TerminalShelf;
 }
 
 /**
@@ -49,41 +54,13 @@ export interface ShelfMap {
  * (Possibly based on the Dewey Decimal Classification system?)
  * Each shelf represents a main category in the classification.
  *
- * If the nesting level (determined by number of slashes in parent_id) 
- * exceeds the maximum depth, a TerminalShelf is returned instead.
+ * Right now this is a mere placeholder as it's not wired in just yet.
  *
- * @param parent_id - The ID of the parent shelf
- * @returns A map of shelf objects indexed by their IDs or a TerminalShelf
+ * @param parent_id - The ID of the parent shelf (currently unused)
+ * @returns A map of shelf objects indexed by their IDs
  *
  */
-export function get_shelves(parent_id: string): ShelfMap | TerminalShelf {
-  // Define maximum nesting depth
-  const MAX_NESTING_DEPTH = 2;
-  
-  // Count slashes to determine nesting level
-  const slashCount = (parent_id.match(/\//g) || []).length;
-  
-  // If we've reached maximum nesting depth, return a TerminalShelf
-  if (slashCount >= MAX_NESTING_DEPTH) {
-    return {
-      id: parent_id,
-      title: parent_id,
-      description: "Terminal shelf - maximum nesting depth reached",
-      type: "terminal",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      books: [
-        {
-          id: `${parent_id}/book1`,
-          title: "Sample Book",
-          description: "This is a sample book in a terminal shelf",
-          children: []
-        }
-      ]
-    };
-  }
-  
-  // Otherwise, continue with normal shelf creation
+export function get_shelves(parent_id: string): ShelfMap {
   let shelves_list: Shelf[] = [
     {
       id: "000",
@@ -105,7 +82,7 @@ export function get_shelves(parent_id: string): ShelfMap | TerminalShelf {
 
   // Properly iterate through the shelves_list array
   for (const shelf of shelves_list) {
-    const item_id = parent_id ? parent_id + "/" + shelf.id : shelf.id;
+    const item_id = parent_id + "/" + shelf.id;
     shelves[item_id] = shelf;
   }
 
