@@ -7,6 +7,7 @@
     Library,
     Plus,
     Shell,
+    ArrowUp,
   } from "@lucide/svelte";
   import ShelfItem from "./ShelfItem.svelte";
 
@@ -22,11 +23,15 @@
     "700": { title: "900", description: "History & geography" },
   };
   // This is a list of note categories that the user will click to choose view a category.
-  // Add a button to go up just style it, don't worry about behaviour AI!
 </script>
 
 <ul class="list bg-base-100 rounded-box shadow-md">
-  <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Shelves</li>
+  <li class="p-4 pb-2 text-xs opacity-60 tracking-wide flex justify-between items-center">
+    <span>Shelves</span>
+    <button class="btn btn-ghost btn-xs rounded-full">
+      <ArrowUp size={16} />
+    </button>
+  </li>
 
   {#each Object.entries(shelves) as [id, { title, description }]}
     <ShelfItem {id} {title} {description} />
