@@ -30,15 +30,7 @@
 
 
 
-
-
-
-
-  // AI: The component is used here
   <SidebarTree note_list={rootNotes} />
-
-
-
 
 
 
