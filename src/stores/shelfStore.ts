@@ -60,11 +60,20 @@ export function get_shelves(parent_id: string): ShelfMap {
 
 
 
-  // The id should get bigger every time a user selects an item but it doesn't, fix this AI!
-
-  for (const id in shelves) {
-    shelves[id].title = parent_id + "/" + shelves[id].title;
-    shelves[id].id = parent_id + "/" + shelves[id].id;
+  // Create nested IDs based on parent selection
+  if (parent_id !== "root") {
+    // For non-root shelves, create proper nesting structure
+    for (const id in shelves) {
+      // Extract the base number from the original ID
+      const baseNumber = id;
+      
+      // Create a properly nested ID that gets longer with each selection
+      shelves[id].id = parent_id + "/" + baseNumber;
+      
+      // Format the title to show the hierarchy
+      const baseName = shelves[id].title;
+      shelves[id].title = baseName + " (in " + parent_id + ")";
+    }
   }
 
   return shelves;
