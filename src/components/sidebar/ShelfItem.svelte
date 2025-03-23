@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Edit, Heart, Bookmark, BookOpen, LibraryIcon } from "@lucide/svelte";
+  import { Edit, Heart, Bookmark, BookOpen, LibraryIcon } from "lucide-svelte";
   import { selectedShelfId } from "../../stores/selectedShelfStore";
   export let buttons: Boolean = false;
   export let title: string = "";
@@ -17,26 +17,13 @@
   on:click={() => selectedShelfId.set(id)}
 >
   <div class="shelf-icon">
-
-
-
-// Fix this AI!
-
-    if (type === "terminal") {
-    <LibraryIcon class="{extra_classes} {size_class}" />
-    } elif (type === "hierarchy_shelf") {
-
-    } else {
-        <b>Bad Type</b>
-        }
-
-
-
-
-
-
-
-
+    {#if type === "terminal"}
+      <Bookmark class="{extra_classes} {size_class}" />
+    {:else if type === "hierarchy_shelf"}
+      <LibraryIcon class="{extra_classes} {size_class}" />
+    {:else}
+      <b>Bad Type</b>
+    {/if}
   </div>
   <div class="shelf-content">
     <div class="shelf-title">{title}</div>
