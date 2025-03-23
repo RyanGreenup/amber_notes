@@ -1,5 +1,12 @@
 <script lang="ts">
-  import { Edit, Heart, Bookmark, BookOpen, LibraryIcon } from "lucide-svelte";
+  import {
+    Edit,
+    Heart,
+    Bookmark,
+    BookOpen,
+    LibraryIcon,
+    Cross,
+  } from "@lucide/svelte";
   import { selectedShelfId } from "../../stores/selectedShelfStore";
   export let buttons: Boolean = false;
   export let title: string = "";
@@ -17,9 +24,10 @@
   on:click={() => selectedShelfId.set(id)}
 >
   <div class="shelf-icon">
-    {#if type === "terminal"}
+  // Use that enum here AI!
+    {#if type === "terminal_shelf_type"}
       <Bookmark class="{extra_classes} {size_class}" />
-    {:else if type === "hierarchy_shelf"}
+    {:else if type === "hierarchy_shelf_type"}
       <LibraryIcon class="{extra_classes} {size_class}" />
     {:else}
       <b>Bad Type</b>
