@@ -74,6 +74,7 @@ export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
   return shelfMap;
 }
 
+// Improve this function so if there are more than 3 slashes it returns a TerminalShelfMap instead AI!
 /**
  * Returns a map of shelves from the database / API
  * (Possibly based on the Dewey Decimal Classification system?)
