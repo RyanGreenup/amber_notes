@@ -28,14 +28,19 @@ export interface ShelfMap {
 }
 
 /**
- * Returns a map of shelves based on the Dewey Decimal Classification system.
+ * Returns a map of shelves from the database / API
+ * (Possibly based on the Dewey Decimal Classification system?)
  * Each shelf represents a main category in the classification.
- * 
+ *
+ * Right now this is a mere placeholder as it's not wired in just yet.
+ *
  * @param parent_id - The ID of the parent shelf (currently unused)
  * @returns A map of shelf objects indexed by their IDs
+ *
+ *
  */
-export function get_shelves(parent_id: String): ShelfMap {
-  const shelves: ShelfMap = {
+export function get_shelves(parent_id: string): ShelfMap {
+  let shelves: ShelfMap = {
     "000": {
       id: "000",
       title: "000",
@@ -51,6 +56,16 @@ export function get_shelves(parent_id: String): ShelfMap {
     "800": { id: "800", title: "800", description: "Literature" },
     "900": { id: "900", title: "900", description: "History & geography" },
   };
+
+
+
+
+  // The id should get bigger every time a user selects an item but it doesn't, fix this AI!
+
+  for (const id in shelves) {
+    shelves[id].title = parent_id + "/" + shelves[id].title;
+    shelves[id].id = parent_id + "/" + shelves[id].id;
+  }
 
   return shelves;
 }
