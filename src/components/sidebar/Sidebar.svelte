@@ -1,9 +1,11 @@
 <script lang="ts">
   import { Folder, File, Plus } from "@lucide/svelte";
-  import { getRootNotes } from "../../stores/notesStore";
+  import { getRootNotes, findNoteById, notesMap, rootNoteIds } from "../../stores/notesStore";
+  import { onMount } from "svelte";
 
-  let notes = getRootNotes();
   export let isOpen: boolean = true;
+  
+  $: rootNotes = getRootNotes();
 </script>
 
 <div
@@ -20,7 +22,7 @@
 
   <div class="sidebar-content flex-1 overflow-y-auto">
     <ul class="menu p-2 gap-1">
-      {#each $notes as note}
+      {#each rootNotes as note}
         {#if note.type === "file"}
           <li>
             <a class="flex items-center gap-2">
@@ -36,14 +38,23 @@
                 <span>{note.title}</span>
               </summary>
               <ul>
-                {#each note.children || [] as child}
-                  <li>
-                    <a class="flex items-center gap-2">
-                      <File size={16} />
-                      <span>{child.title}</span>
-                    </a>
-                  </li>
-                {/each}
+                {#if note.children && note.children.length > 0}
+                  {#each note.children as childId}
+                    {@const child = findNoteById(childId)}
+                    {#if child}
+                      <li>
+                        <a class="flex items-center gap-2">
+                          {#if child.type === "file"}
+                            <File size={16} />
+                          {:else}
+                            <Folder size={16} />
+                          {/if}
+                          <span>{child.title}</span>
+                        </a>
+                      </li>
+                    {/if}
+                  {/each}
+                {/if}
               </ul>
             </details>
           </li>
