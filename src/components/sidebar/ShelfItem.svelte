@@ -37,9 +37,9 @@
     {/if}
   </div>
   <div class="shelf-content">
-    <div class="shelf-title">{title}</div>
+    <div class="shelf-title">{description}</div>
     <div class="shelf-description">
-      {description}
+      {title}
       {#if noteCount > 0}
         <span class="note-count"><BookOpen size="12" /> {noteCount} notes</span>
       {/if}

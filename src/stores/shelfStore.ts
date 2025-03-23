@@ -82,16 +82,17 @@ export function transformShelvesToMap<T extends Shelf | Book>(
  * @returns A map of shelf or book objects indexed by their IDs
  */
 export function get_shelves(parent_id: string): ShelfMap | BookMap {
+  const MAX_DEPTH_FOR_EVAL = 2;
   // Count the number of slashes in parent_id
   const slashCount = (parent_id.match(/\//g) || []).length;
 
   // If we're at a very deep level (more than 4 slashes), return books
-  if (slashCount > 4) {
+  if (slashCount > MAX_DEPTH_FOR_EVAL) {
     return get_books(parent_id);
   }
 
   // If we're at a deep level (more than 3 slashes), return terminal shelves
-  if (slashCount > 3) {
+  if (slashCount > MAX_DEPTH_FOR_EVAL-1) {
     const terminalShelves: Shelf[] = [
       {
         id: "001",
