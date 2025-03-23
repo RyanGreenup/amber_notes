@@ -1,7 +1,8 @@
 <script lang="ts">
   import { Folder, File, Plus } from "@lucide/svelte";
-  import { notes } from "../../stores/notesStore";
-  
+  import { getRootNotes } from "../../stores/notesStore";
+
+  let notes = getRootNotes();
   export let isOpen: boolean = true;
 </script>
 
