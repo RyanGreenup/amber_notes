@@ -1,8 +1,6 @@
 import { writable, get } from "svelte/store";
 import type { Note } from "./notesStore.ts";
 
-// Combine the Shelf and TerminalShelf into a single type AI!
-
 export enum ShelfType {
   BOOK = "book_object_type",
   HIERARCHY = "hierarchy_shelf_type",
@@ -24,25 +22,13 @@ export interface Book {
   type: ShelfType.BOOK;
 }
 
-// shelves can contain other shelves
-// Maybe we'll call these aisles?
-// Correspond to the x's in xxx.yyyy for dewey decimal
+// Shelf can be either a hierarchy shelf (can contain other shelves)
+// or a terminal shelf (can only contain books)
 export interface Shelf {
   id: string;
   title: string;
   description: string;
-  type: ShelfType.HIERARCHY;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
-
-// This is the physical timber on a bookshelf, like the tier/actual shelf/row
-// this can only contain books
-export interface TerminalShelf {
-  id: string;
-  title: string;
-  description: string;
-  type: ShelfType.TERMINAL; // Cannot contain other shelves, only books
+  type: ShelfType.HIERARCHY | ShelfType.TERMINAL;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -55,21 +41,17 @@ export interface BookMap {
   [id: string]: Book;
 }
 
-export interface TerminalShelfMap {
-  [id: string]: TerminalShelf;
-}
-
 /**
  * Transforms a list of shelves into a map
  *
  * This is for use in debugging and takes the parent_id to create a nested
  * level of hierarchy for testing purposes
  *
- * @param shelves - Array of Shelf or TerminalShelf objects to transform
+ * @param shelves - Array of Shelf or Book objects to transform
  * @param parentId - Optional parent ID to prefix shelf IDs
  * @returns A map of shelf objects indexed by their IDs
  */
-export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
+export function transformShelvesToMap<T extends Shelf | Book>(
   shelves: T[],
   parentId?: string,
 ): { [id: string]: T } {
@@ -88,7 +70,7 @@ export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
 }
 
 /**
- * Returns a map of shelves or terminal shelves from the database / API
+ * Returns a map of shelves from the database / API
  * (Based on the Dewey Decimal Classification system)
  * Each shelf represents a main category in the classification.
  *
@@ -96,11 +78,11 @@ export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
  * which can only contain books, not other shelves.
  *
  * @param parent_id - The ID of the parent shelf
- * @returns A map of shelf, terminal shelf, or book objects indexed by their IDs
+ * @returns A map of shelf or book objects indexed by their IDs
  */
 export function get_shelves(
   parent_id: string,
-): ShelfMap | TerminalShelfMap | BookMap {
+): ShelfMap | BookMap {
   // Count the number of slashes in parent_id
   const slashCount = (parent_id.match(/\//g) || []).length;
 
@@ -111,7 +93,7 @@ export function get_shelves(
 
   // If we're at a deep level (more than 3 slashes), return terminal shelves
   if (slashCount > 3) {
-    const terminalShelves: TerminalShelf[] = [
+    const terminalShelves: Shelf[] = [
       {
         id: "001",
         title: "001",
