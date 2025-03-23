@@ -1,6 +1,12 @@
 import { writable, get } from "svelte/store";
 import type { Note } from "./notesStore.ts";
 
+export enum ShelfType {
+  BOOK = "book_object_type",
+  HIERARCHY = "hierarchy_shelf_type",
+  TERMINAL = "terminal_shelf_type"
+}
+
 export interface Folder {
   id: string;
   title: string;
@@ -13,7 +19,7 @@ export interface Book {
   title: string;
   description: string;
   children: Folder[];
-  type: "book_object_type";
+  type: ShelfType.BOOK;
 }
 
 // shelves can contain other shelves
@@ -23,7 +29,7 @@ export interface Shelf {
   id: string;
   title: string;
   description: string;
-  type: "hierarchy_shelf_type";
+  type: ShelfType.HIERARCHY;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -34,7 +40,7 @@ export interface TerminalShelf {
   id: string;
   title: string;
   description: string;
-  type: "terminal_shelf_type"; // Cannot contain other shelves, only books
+  type: ShelfType.TERMINAL; // Cannot contain other shelves, only books
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -97,31 +103,31 @@ export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
         id: "001",
         title: "001",
         description: "Knowledge",
-        type: "terminal_shelf_type",
+        type: ShelfType.TERMINAL,
       },
       {
         id: "002",
         title: "002",
         description: "The book",
-        type: "terminal_shelf_type",
+        type: ShelfType.TERMINAL,
       },
       {
         id: "003",
         title: "003",
         description: "Systems",
-        type: "terminal_shelf_type",
+        type: ShelfType.TERMINAL,
       },
       {
         id: "004",
         title: "004",
         description: "Data processing & Computer science",
-        type: "terminal_shelf_type",
+        type: ShelfType.TERMINAL,
       },
       {
         id: "005",
         title: "005",
         description: "Computer programming",
-        type: "terminal_shelf_type",
+        type: ShelfType.TERMINAL,
       },
     ];
 
@@ -147,7 +153,7 @@ export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
   ];
 
   for (const item_id in shelves_list) {
-    shelves_list[item_id].type = "hierarchy_shelf_type";
+    shelves_list[item_id].type = ShelfType.HIERARCHY;
   }
 
   // Transform the shelves list into a map using the utility function
