@@ -9,10 +9,14 @@
   import { onMount } from "svelte";
   import SidebarTree from "./SidebarTree.svelte";
   import SidebarList from "./SidebarList.svelte";
+  import get_shelves from "../../stores/shelfStore.ts";
 
   export let isOpen: boolean = true;
 
   $: rootNotes = getRootNotes();
+
+  /* For Devel */
+  const shelves = get_shelves("");
 </script>
 
 <div
@@ -27,9 +31,8 @@
     </button>
   </div>
 
-  <SidebarTree note_list={rootNotes} />
-
-  <!-- <SidebarList note_list={rootNotes} /> -->
+  <!-- <SidebarTree note_list={rootNotes} /> -->
+  <SidebarList />
 </div>
 
 <style>
