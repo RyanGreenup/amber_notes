@@ -74,19 +74,65 @@ export function transformShelvesToMap<T extends Shelf | TerminalShelf>(
   return shelfMap;
 }
 
-// Improve this function so if there are more than 3 slashes it returns a TerminalShelfMap instead AI!
 /**
- * Returns a map of shelves from the database / API
- * (Possibly based on the Dewey Decimal Classification system?)
+ * Returns a map of shelves or terminal shelves from the database / API
+ * (Based on the Dewey Decimal Classification system)
  * Each shelf represents a main category in the classification.
  *
- * Right now this is a mere placeholder as it's not wired in just yet.
+ * If the parent_id contains more than 3 slashes, it returns terminal shelves
+ * which can only contain books, not other shelves.
  *
- * @param parent_id - The ID of the parent shelf (currently unused)
- * @returns A map of shelf objects indexed by their IDs
- *
+ * @param parent_id - The ID of the parent shelf
+ * @returns A map of shelf or terminal shelf objects indexed by their IDs
  */
-export function get_shelves(parent_id: string): ShelfMap {
+export function get_shelves(parent_id: string): ShelfMap | TerminalShelfMap {
+  // Count the number of slashes in parent_id
+  const slashCount = (parent_id.match(/\//g) || []).length;
+  
+  // If we're at a deep level (more than 3 slashes), return terminal shelves
+  if (slashCount > 3) {
+    const terminalShelves: TerminalShelf[] = [
+      {
+        id: "001",
+        title: "001",
+        description: "Knowledge",
+        type: "terminal",
+        books: []
+      },
+      {
+        id: "002",
+        title: "002",
+        description: "The book",
+        type: "terminal",
+        books: []
+      },
+      {
+        id: "003",
+        title: "003",
+        description: "Systems",
+        type: "terminal",
+        books: []
+      },
+      {
+        id: "004",
+        title: "004",
+        description: "Data processing & Computer science",
+        type: "terminal",
+        books: []
+      },
+      {
+        id: "005",
+        title: "005",
+        description: "Computer programming",
+        type: "terminal",
+        books: []
+      }
+    ];
+    
+    return transformShelvesToMap(terminalShelves, parent_id);
+  }
+  
+  // Otherwise return regular shelves
   let shelves_list: Shelf[] = [
     {
       id: "000",
@@ -105,7 +151,5 @@ export function get_shelves(parent_id: string): ShelfMap {
   ];
 
   // Transform the shelves list into a map using the utility function
-  let shelves: ShelfMap = transformShelvesToMap(shelves_list, parent_id);
-
-  return shelves;
+  return transformShelvesToMap(shelves_list, parent_id);
 }
