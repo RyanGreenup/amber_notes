@@ -26,7 +26,6 @@ export interface Shelf {
   updatedAt?: Date;
 }
 
-
 // This is the physical timber on a bookshelf, like the tier/actual shelf/row
 // this can only contain books
 export interface TerminalShelf {
@@ -39,30 +38,36 @@ export interface TerminalShelf {
   books: Book[]; // Only books, no shelves
 }
 
-
 export interface ShelfMap {
   [id: string]: Shelf;
 }
 
+// Generalise this so it can work for both a Shelf and TerminalShelf AI!
 /**
  * Transforms a list of shelves into a ShelfMap
- * 
+ *
+ * This is for use in debugging and takes the parent_id to create a nested
+ * level of hierarchy for testing purposes
+ *
  * @param shelves - Array of Shelf objects to transform
  * @param parentId - Optional parent ID to prefix shelf IDs
  * @returns A map of shelf objects indexed by their IDs
  */
-export function transformShelvesToMap(shelves: Shelf[], parentId?: string): ShelfMap {
+export function transformShelvesToMap(
+  shelves: Shelf[],
+  parentId?: string,
+): ShelfMap {
   const shelfMap: ShelfMap = {};
-  
+
   for (const shelf of shelves) {
     const id = parentId ? `${parentId}/${shelf.id}` : shelf.id;
     shelfMap[id] = {
       ...shelf,
       id: id,
-      title: parentId ? `${parentId}/${shelf.title}` : shelf.title
+      title: parentId ? `${parentId}/${shelf.title}` : shelf.title,
     };
   }
-  
+
   return shelfMap;
 }
 
@@ -98,6 +103,7 @@ export function get_shelves(parent_id: string): ShelfMap {
     { id: "800", title: "800", description: "Literature" },
     { id: "900", title: "900", description: "History & geography" },
   ];
+
 
   let shelves: ShelfMap = {};
 
