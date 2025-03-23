@@ -1,6 +1,7 @@
 import { writable, get } from "svelte/store";
 import type { Note } from "./notesStore.ts";
 
+
 export enum ShelfType {
   BOOK = "book_object_type",
   HIERARCHY = "hierarchy_shelf_type",
@@ -80,9 +81,7 @@ export function transformShelvesToMap<T extends Shelf | Book>(
  * @param parent_id - The ID of the parent shelf
  * @returns A map of shelf or book objects indexed by their IDs
  */
-export function get_shelves(
-  parent_id: string,
-): ShelfMap | BookMap {
+export function get_shelves(parent_id: string): ShelfMap | BookMap {
   // Count the number of slashes in parent_id
   const slashCount = (parent_id.match(/\//g) || []).length;
 

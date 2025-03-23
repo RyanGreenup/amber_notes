@@ -34,6 +34,7 @@
     ? 'w-64'
     : 'w-0'} transition-all duration-300 overflow-hidden flex flex-col"
 >
+
   <SidebarList {shelves} />
   <!-- <SidebarTree note_list={rootNotes} /> -->
 </div>
