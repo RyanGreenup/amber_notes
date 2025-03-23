@@ -26,14 +26,17 @@
   // Update shelves when selected shelf changes
   selectedShelfId.subscribe((id) => {
     if (id) {
-      currentParentId = id;
-      shelves = get_shelves(id);
-
-      // Check if the selected item is a book
-      const selectedShelf = Object.values(shelves).find(
-        (shelf) => shelf.id === id,
+      // First check if the selected ID is a book
+      // We need to check the current shelves before updating them
+      const currentShelves = get_shelves(currentParentId);
+      const selectedShelf = Object.values(currentShelves).find(
+        (shelf) => shelf.id === id
       );
       isViewingBook = selectedShelf?.type === ShelfType.BOOK;
+      
+      // Then update the current parent ID and shelves
+      currentParentId = id;
+      shelves = get_shelves(id);
     }
   });
 </script>
@@ -43,9 +46,6 @@
     ? 'w-64'
     : 'w-0'} transition-all duration-300 overflow-hidden flex flex-col"
 >
-  <h1 class="prose">
-    {isViewingBook}
-  </h1>
 
   {#if isViewingBook}
     <SidebarTree note_list={rootNotes} />
